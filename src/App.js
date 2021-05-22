@@ -27,7 +27,7 @@ const App = () => {
     const user = { username, password };
     // send user input to the server
     const response = await axios.post(
-      "http://api.getcountapp.com/api/v1/authenticate",
+      "https://api.getcountapp.com/api/v1/authenticate",
       user
     );
     // set the user state 
