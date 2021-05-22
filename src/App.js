@@ -5,7 +5,7 @@ const App = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState()
-
+// already logged in
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {
@@ -25,27 +25,27 @@ const App = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     const user = { username, password };
-    // send the username and password to the server
+    // send user input to the server
     const response = await axios.post(
-      "http://blogservice.herokuapp.com/api/login",
+      "http://api.getcountapp.com/api/v1/authenticate",
       user
     );
-    // set the state of the user
+    // set the user state 
     setUser(response.data)
-    // store the user in localStorage
+    // store in localStorage
     localStorage.setItem('user', response.data)
     console.log(response.data)
     
   };
 
-// if there's a user show the message below
+// logged in page
   if (user) {
     return <div>{user.name} Logged in
     <button onClick={handleLogout}>Logout</button>
     </div>;
   }
 
-  // if there's no user, show the login form
+  //  show the login form for non user
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="username">Username: </label>
@@ -66,7 +66,6 @@ const App = () => {
       </div>
       <button type="submit">Login</button>
     </form>
-    
 
   );
 };
